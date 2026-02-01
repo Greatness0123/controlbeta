@@ -67,7 +67,7 @@ export default function Team() {
                     {teamMembers.map((member) => (
                         <div key={member.id} className="snap-center shrink-0 w-[280px] flex flex-col items-center">
                             <div
-                                className="w-32 h-32 rounded-full p-1 bg-gradient-to-br from-purple-100 to-purple-500/50 mb-6 shadow-xl relative z-10"
+                                className="w-32 h-32 rounded-full p-1 bg-gradient-to-br from-purple-100 to-purple-500/50 dark:from-purple-900/50 dark:to-purple-500/70 mb-6 shadow-xl relative z-10"
                                 onClick={() => setSelectedMember(member)}
                             >
                                 <img
@@ -104,7 +104,7 @@ export default function Team() {
                                 onClick={() => setSelectedMember(member)}
                             >
                                 {/* Image Circle */}
-                                <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-br from-purple-100 to-purple-500/50 cursor-pointer hover:scale-110 transition-transform duration-300 shadow-xl relative z-10">
+                                <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-br from-purple-100 to-purple-500/50 dark:from-purple-900/50 dark:to-purple-500/70 cursor-pointer hover:scale-110 transition-transform duration-300 shadow-xl relative z-10">
                                     <img
                                         src={member.image}
                                         alt={member.name}

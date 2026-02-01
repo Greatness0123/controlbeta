@@ -53,6 +53,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
     --card: #09090b;
     --card-foreground: #fafafa;
     --popover: #09090b;
@@ -162,8 +164,40 @@ body {
   background-clip: text;
 }
 
+@media (prefers-color-scheme: dark) {
+  .text-gradient {
+    background: linear-gradient(to right, #a855f7, #e9d5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.dark .text-gradient {
+  background: linear-gradient(to right, #a855f7, #e9d5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .text-gradient-subtle {
   background: linear-gradient(to bottom, #18181b, #71717a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (prefers-color-scheme: dark) {
+  .text-gradient-subtle {
+    background: linear-gradient(to bottom, #fafafa, #a1a1aa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.dark .text-gradient-subtle {
+  background: linear-gradient(to bottom, #fafafa, #a1a1aa);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -209,8 +243,20 @@ body {
 /* Grid Background */
 .bg-grid {
   background-size: 50px 50px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-grid {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+}
+
+.dark .bg-grid {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
 
 /* Scrollbar hiding for mobile team view */

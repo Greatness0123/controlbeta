@@ -123,7 +123,7 @@ export default function Home() {
                 <RotatingText
               texts={['computer', 'applications', 'system', 'software', 'research', 'workflows']}
               mainClassName=" rounded-lg text-4xl md:text-6xl lg:text-7xl font-bold"
-              elementLevelClassName="bg-linear-to-r from-[#9333ea] to-[#18181b] bg-clip-text text-transparent"
+              elementLevelClassName="bg-gradient-to-r from-[#9333ea] to-[#18181b] dark:from-[#a855f7] dark:to-[#e9d5ff] bg-clip-text text-transparent"
               staggerFrom={"last"}
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
