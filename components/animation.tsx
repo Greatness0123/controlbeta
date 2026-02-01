@@ -55,68 +55,87 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = "" }) => {
   // Ask mode workflow
   const askWorkflow: WorkflowStep[] = [
     {
-      user: "What's the capital of France?",
-      ai: "The capital of France is Paris. It's known for its art, fashion, gastronomy, and culture. The city has been a major settlement for over two millennia.",
+      user: "Can you work with my custom CAD software on Linux?",
+      ai: "Yes. I see the screen exactly as you do. I can drive any software interface—whether it's Photoshop on Mac, a terminal on Ubuntu, or custom legacy apps on Windows. No APIs or servers required.",
       file: null,
-      timings: { typingInput: 1200, sendingDelay: 500, aiResponse: 2000 }
+      timings: { typingInput: 1800, sendingDelay: 600, aiResponse: 3000 }
     },
     {
-      user: "Can you explain quantum computing?",
-      ai: "Quantum computing uses quantum bits (qubits) that can exist in multiple states simultaneously, allowing for exponentially faster calculations.",
+      user: "Summarize this 50-page rental agreement for me",
+      ai: "I've analyzed the lease. Key points:\n\n1. Rent is $2,400/mo, due on the 1st.\n2. No pets allowed without prior approval.\n3. Security deposit is one month's rent.\n\n⚠️ Clause 14.2 is unusual: it requires professional carpet cleaning every 6 months. Want me to flag this?",
+      file: "rental_lease_final.pdf",
+      timings: { typingInput: 2000, sendingDelay: 800, aiResponse: 3500 }
+    },
+    {
+      user: "Debug this circular dependency error",
+      ai: "I see the issue in `auth-provider.tsx`. You're invalidating the context inside its own consumer. I can refactor this to use a separate `useSession` hook to break the cycle. Shall I apply the fix?",
+      file: "auth-provider.tsx",
+      timings: { typingInput: 1600, sendingDelay: 800, aiResponse: 3200 }
+    },
+    {
+      user: "Find that invoice from 'Acme Corp' I saved last month",
+      ai: "Found it. `Invoice_Acme_Oct24.pdf` was in your Downloads folder. I also found a duplicate in Documents/Financials. Would you like me to open the one in Documents?",
       file: null,
-      timings: { typingInput: 1800, sendingDelay: 500, aiResponse: 3500 }
-    },
-    {
-      user: "Here's my research paper",
-      ai: "I've reviewed your research paper. The methodology section could benefit from more statistical validation.",
-      file: "research_paper.pdf",
-      timings: { typingInput: 1000, sendingDelay: 500, aiResponse: 3000 }
-    },
-    {
-      user: "Translate this to Spanish",
-      ai: "I'd be happy to help with translation.the attached document speaks on the impact of computeruse agent in mordern age and its importance",
-      file: "document.txt",
-      timings: { typingInput: 1100, sendingDelay: 500, aiResponse: 2400 }
+      timings: { typingInput: 1800, sendingDelay: 600, aiResponse: 2500 }
     }
   ];
 
   // Act mode workflow
   const actWorkflow: WorkflowStep[] = [
     {
-      user: "Play my workout playlist on Spotify",
+      user: "Deploy the latest build to the staging server",
       actions: [
-        { text: "Analyzing your request...", duration: 1500 },
-        { text: "Connecting to Spotify API...", duration: 1600 },
-        { text: "Launching Spotify application...", duration: 1800 },
-        { text: "Loading 'Workout Mix' playlist...", duration: 1400 },
-        { text: "Playing track 1 of 45...", duration: 1200 }
+        { text: "Opening Terminal (Ubuntu)...", duration: 1000 },
+        { text: "SSHing into user@192.168.1.55...", duration: 1500 },
+        { text: "Pulling latest docker images...", duration: 2200 },
+        { text: "Restarting NGINX service...", duration: 1200 },
+        { text: "Verifying endpoint health check...", duration: 1400 },
+        { text: "Deployment successful. Closing connection.", duration: 1000 }
       ],
       file: null,
-      timings: { typingInput: 1500, sendingDelay: 500, finalMessage: 1000 }
+      timings: { typingInput: 2000, sendingDelay: 600, finalMessage: 1200 }
     },
     {
-      user: "Send an email to Alex about the meeting",
+      user: "Export Q3 reports from 'OldBooks 95' legacy app",
       actions: [
-        { text: "Composing new email...", duration: 1200 },
-        { text: "Adding recipient: alex@company.com...", duration: 1500 },
-        { text: "Setting subject: 'Meeting Tomorrow'...", duration: 1300 },
-        { text: "Drafting email body...", duration: 1400 },
-        { text: "Sending email...", duration: 1000 }
+        { text: "Launching 'OldBooks 95'...", duration: 1500 },
+        { text: "Navigating archaic menu structure...", duration: 1800 },
+        { text: "Locating 'Reports' > 'Quarterly'...", duration: 1200 },
+        { text: "Setting date range: July 1 - Sept 30...", duration: 1500 },
+        { text: "Clicking tiny 'Export CSV' button...", duration: 1000 },
+        { text: "Handling 'Out of Memory' popup...", duration: 1200 },
+        { text: "Retrying export...", duration: 1000 },
+        { text: "Success. Saved to Desktop.", duration: 800 }
       ],
       file: null,
-      timings: { typingInput: 1800, sendingDelay: 500, finalMessage: 1000 }
+      timings: { typingInput: 2400, sendingDelay: 800, finalMessage: 1500 }
     },
     {
-      user: "Process the sales report",
+      user: "Organize my messy Desktop into folders by file type",
       actions: [
-        { text: "Opening sales_q3.xlsx...", duration: 1400 },
-        { text: "Reading 2,847 data entries...", duration: 1700 },
-        { text: "Analyzing Q3 sales data...", duration: 1600 },
-        { text: "Generating summary report...", duration: 1500 },
-        { text: "Saving processed report...", duration: 1200 }
+        { text: "Scanning Desktop items...", duration: 1200 },
+        { text: "Identified 43 images, 12 documents, 5 installers...", duration: 1500 },
+        { text: "Creating folder: 'Desktop/Images'...", duration: 1000 },
+        { text: "Moving 43 .png and .jpg files...", duration: 2200 },
+        { text: "Creating folder: 'Desktop/Docs'...", duration: 1000 },
+        { text: "Moving 12 .pdf and .docx files...", duration: 1400 },
+        { text: "Cleaning up remaining shortcuts...", duration: 1100 }
       ],
-      file: "sales_q3.xlsx",
-      timings: { typingInput: 1200, sendingDelay: 500, finalMessage: 1000 }
+      file: null,
+      timings: { typingInput: 2500, sendingDelay: 600, finalMessage: 1200 }
+    },
+    {
+      user: "Cancel my 'TooExpensive' subscription",
+      actions: [
+        { text: "Navigating to service settings...", duration: 1800 },
+        { text: "Locating 'Billing' tab...", duration: 1200 },
+        { text: "Clicking 'Cancel Subscription'...", duration: 1000 },
+        { text: "Selecting reason: 'Too expensive'...", duration: 1100 },
+        { text: "Confirming cancellation...", duration: 1200 },
+        { text: "Saving cancellation receipt...", duration: 1400 }
+      ],
+      file: null,
+      timings: { typingInput: 2000, sendingDelay: 600, finalMessage: 1200 }
     }
   ];
 
@@ -304,9 +323,12 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ className = "" }) => {
   useEffect(() => {
     if (messagesContainerRef.current && !isHovering) {
       const { scrollHeight, clientHeight } = messagesContainerRef.current;
-      messagesContainerRef.current.scrollTo({
-        top: scrollHeight - clientHeight,
-        behavior: 'smooth'
+      // Use requestAnimationFrame + instant scroll to avoid continuous smooth animations which can cause jank
+      requestAnimationFrame(() => {
+        messagesContainerRef.current!.scrollTo({
+          top: scrollHeight - clientHeight,
+          behavior: 'auto'
+        });
       });
     }
   }, [messages, isHovering]);

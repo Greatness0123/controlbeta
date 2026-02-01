@@ -1,10 +1,12 @@
 "use client";
 
 import AIAssistant from "@/components/animation";
+import RotatingText from "@/components/RotatingText";
 import Team from "@/components/Team";
 import { FAQSection } from "@/components/faq";
 import { FadeIn } from "@/components/fade-in";
 import { useState, useEffect } from "react";
+import GradientText from '@/components/gradienttext'
 
 export default function Home() {
   const [formData, setFormData] = useState({ Name: '', Email: '', Message: '' });
@@ -99,9 +101,9 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-12 md:pt-32 md:pb-24 px-4 md:px-6 max-w-7xl mx-auto">
+      <section className="relative pt-16 pb-8 md:pt-20 md:pb-12 px-4 md:px-6 max-w-7xl mx-auto">
         <FadeIn delay={100}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
 
             {/* Left Column: Text Content */}
             <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 md:space-y-8 z-10">
@@ -111,11 +113,35 @@ export default function Home() {
               </div>
 
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-foreground">
-                Control your computer with <span className="text-gradient">natural language</span>
+                Control your 
+                                <GradientText
+                  colors={["#5227FF","#FF9FFC","#B19EEF"]}
+                  animationSpeed={8}
+                  showBorder={false}
+                  className="custom-class"
+                >
+                <RotatingText
+              texts={['computer', 'applications', 'system', 'software', 'research', 'workflows']}
+              mainClassName=" rounded-lg text-4xl md:text-6xl lg:text-7xl font-bold"
+              elementLevelClassName="bg-linear-to-r from-[#9333ea] to-[#18181b] bg-clip-text text-transparent"
+              staggerFrom={"last"}
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2000}
+            />
+            </GradientText>
               </h1>
 
               <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mx-auto md:mx-0">
-                The first true AI desktop agent. Actively performs tasks, manages files, and executes complex workflows just by asking. Private, powerful, and invisible.
+                The AI desktop agent that gets things done — private, local-first, and ready out of the box.
+              </p>
+
+              <p className="text-sm md:text-base text-muted-foreground max-w-xl leading-relaxed mx-auto md:mx-0">
+                Tell it what to do. It does it. No manuals, no setup.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
@@ -155,8 +181,8 @@ export default function Home() {
 
             {/* Right Column: Animation Component */}
             <div className="relative w-full max-w-xl mx-auto md:mr-0">
-              {/* Glow Effect */}
-              <div className="absolute -inset-4 md:-inset-10 bg-gradient-to-r from-accent-glow/20 to-accent-purple/20 rounded-full blur-2xl md:blur-3xl opacity-50 animate-pulse-glow pointer-events-none"></div>
+              {/* Glow Effect (reduced intensity for smoother scrolling) */}
+              <div className="absolute -inset-4 md:-inset-10 bg-gradient-to-r from-accent-glow/10 to-accent-purple/10 rounded-full blur-lg md:blur-xl opacity-40 pointer-events-none"></div>
 
               <div className="relative glass-card rounded-3xl md:rounded-[40px] overflow-hidden border border-border shadow-2xl">
                 <div className="absolute top-0 left-0 right-0 h-8 md:h-10 bg-card border-b border-border flex items-center px-4 gap-2 z-20">
@@ -174,7 +200,7 @@ export default function Home() {
       </section>
 
       {/* Versatility / Definition Section */}
-      <section className="pt-24 pb-8 px-4 md:px-6 relative overflow-hidden">
+      <section className="pt-16 pb-6 px-4 md:px-6 relative overflow-hidden">
         {/* Dynamic Background Elements */}
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] animate-pulse-glow -z-10"></div>
         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px] animate-pulse-glow delay-1000 -z-10"></div>
@@ -185,14 +211,18 @@ export default function Home() {
               Designed to do <span className="text-gradient">Everything</span>.
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
-              Control was built with a single purpose: to handle any task on your system. It adapts to become whatever you need it to be—whether that's a personal assistant managing your calendar, a digital butler organizing your files, or a creative partner aiding your workflow.
-            </p>
+              Control was built with a single purpose: to handle any task on your system. <strong>It can control any software interface regardless of platform or operating system.</strong> Whether that's a personal assistant managing your calendar, a digital butler organizing your files, or a creative partner aiding your workflow.
+            </p><br></br>
+            <h3 className="text-3xl md:text-5xl font-bold leading-tight text-foreground">
+              One App <span className="text-gradient">Full Control</span>.
+            </h3>
+
           </div>
         </FadeIn>
       </section>
 
       {/* Features Grid */}
-      <section id="features" className="pt-8 pb-24 px-4 md:px-6 relative">
+      <section id="features" className="pt-6 pb-16 px-4 md:px-6 relative">
         <FadeIn delay={200}>
           <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none"></div>
           <div className="max-w-7xl mx-auto">
@@ -244,7 +274,7 @@ export default function Home() {
       </section>
 
       {/* Interactive Use Cases */}
-      <section id="use-cases" className="py-16 md:py-24 px-4 md:px-6 bg-secondary/50">
+      <section id="use-cases" className="py-12 md:py-16 px-4 md:px-6 bg-secondary/50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center text-gradient-subtle">Designed for your workflow</h2>
 
@@ -271,7 +301,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 md:py-32 px-4 md:px-6 text-center">
+      <section className="py-16 md:py-24 px-4 md:px-6 text-center">
         <div className="max-w-3xl mx-auto glass-card rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 border border-border relative overflow-hidden bg-card shadow-xl">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-accent-purple/5 to-transparent pointer-events-none"></div>
 

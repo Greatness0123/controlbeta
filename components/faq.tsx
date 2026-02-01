@@ -10,15 +10,15 @@ const faqCategories = [
     questions: [
       {
         q: 'What is Control?',
-        a: 'Control is the first AI-powered personal computer assistant that actively performs tasks on your computer. Unlike chatbots, Control executes real actions through voice commands.',
+        a: 'Control is the first unified AI agent for your software. It doesn\'t just chat; it interfaces with your applications to get things done. Think of it as a power-user layer that sits above your system.',
       },
       {
-        q: 'How is Control different from Siri or Alexa?',
-        a: 'Control is a true computer use agent—it doesn\'t just answer questions, it performs complex multi-step tasks on your computer. Siri and Alexa have limited app integration compared to Control\'s comprehensive computer control.',
+        q: 'Do I need to set up servers or workflows?',
+        a: 'Absolutely not. Control is a single application. No MCP servers, no complex "workflow" graphs, no coding. You install it, you speak to it, and it works. It\'s designed for humans, not just engineers.',
       },
       {
-        q: 'When will Control be publicly available?',
-        a: 'We\'re launching a public beta in March 2025 and expect to release publicly in Q2 2025. Join the beta now to get early access!',
+        q: 'How is this different from other "agents"?',
+        a: 'Most agents require you to build the logic or host a local server. Control is pre-trained to handle your system out of the box. It\'s the difference between buying a car and building an engine.',
       },
       {
         q: 'Is Control free?',
@@ -35,11 +35,11 @@ const faqCategories = [
       },
       {
         q: 'Does Control require an internet connection?',
-        a: 'Control runs primarily locally, but requires an internet connection for initial setup and cloud features. Voice processing can happen offline with local models.',
+        a: 'Control runs primarily locally for actions, but requires an internet connection for its brain. We are working on fully offline models for the future.',
       },
       {
-        q: 'How much resources does Control use?',
-        a: 'Control requires 4GB RAM minimum (8GB recommended) and about 500MB of storage. It\'s optimized to run efficiently alongside other applications.',
+        q: 'Do I need a GPU?',
+        a: 'No high-end hardware required. Because Control is efficient and offloads heavy thinking when needed, it runs smoothly on any modern laptop (4GB RAM minimum).',
       },
       {
         q: 'Can I use Control with multiple computers?',

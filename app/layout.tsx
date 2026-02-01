@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Control | The AI Desktop Agent",
-  description: "Control your computer with natural language. Private, powerful, and invisible.",
+  description: "Control performs the tasks you don't want to do — an era where you don't need to know everything about an application to use it. No more 'how-to' tutorials. Private, powerful, and invisible.",
   icons: {
     icon: '/icon-removebg-preview.png',
   },
