@@ -7,6 +7,7 @@ import { FAQSection } from "@/components/faq";
 import { FadeIn } from "@/components/fade-in";
 import { useState, useEffect } from "react";
 import GradientText from '@/components/gradienttext'
+import InfiniteRotatingCards from "@/components/InfiniteRotatingCards";
 
 export default function Home() {
   const [formData, setFormData] = useState({ Name: '', Email: '', Message: '' });
@@ -81,9 +82,11 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 border-b border-border bg-background/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-foreground rounded-lg flex items-center justify-center p-1">
-              <img src="/icon-removebg-preview.png" alt="Control" className="w-full h-full object-contain invert dark:invert-0" />
-            </div>
+            <img
+              src="/icon-removebg-preview.png"
+              alt="Control"
+              className="w-8 h-8 object-contain dark-invert"
+            />
             <span className="font-bold text-xl tracking-tight">Control</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
@@ -113,7 +116,7 @@ export default function Home() {
               </div>
 
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-foreground">
-                Control your 
+                Control your <br></br>
                                 <GradientText
                   colors={["#5227FF","#FF9FFC","#B19EEF"]}
                   animationSpeed={8}
@@ -124,6 +127,7 @@ export default function Home() {
               texts={['computer', 'applications', 'system', 'software', 'research', 'workflows']}
               mainClassName=" rounded-lg text-4xl md:text-6xl lg:text-7xl font-bold"
               elementLevelClassName="bg-gradient-to-r from-[#9333ea] to-[#18181b] dark:from-[#a855f7] dark:to-[#e9d5ff] bg-clip-text text-transparent"
+              splitBy="words"
               staggerFrom={"last"}
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -276,27 +280,67 @@ export default function Home() {
       {/* Interactive Use Cases */}
       <section id="use-cases" className="py-12 md:py-16 px-4 md:px-6 bg-secondary/50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center text-gradient-subtle">Designed for your workflow</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: "Developers", items: ["Terminal automation", "Code analysis", "Log monitoring"], color: "purple" },
-              { title: "Creatives", items: ["File organization", "Asset management", "Batch processing"], color: "purple" },
-              { title: "Everyone", items: ["Email drafting", "Calendar management", "Smart home control"], color: "purple" }
-            ].map((useCase, i) => (
-              <div key={i} className="border-l-2 border-border pl-6 py-2 hover:border-accent-purple transition-colors">
-                <h3 className="text-xl font-bold mb-4 text-foreground">{useCase.title}</h3>
-                <ul className="space-y-3">
-                  {useCase.items.map((item, j) => (
-                    <li key={j} className="flex items-center gap-3 text-muted-foreground text-sm md:text-base">
-                      <i className="fas fa-check text-xs text-accent-purple"></i>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div className="text-center mb-10 md:mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground">What can Control do?</h2>
+            <p className="mt-3 text-muted-foreground max-w-2xl mx-auto text-sm md:text-base">
+              Control is simply a situation where a computer-use agent is maximized, it can operate across apps like a power user: read screens,
+              click, type, navigate, and chain actions into real outcomes.
+            </p>
           </div>
+
+          <InfiniteRotatingCards
+            speedPxPerSecond={90}
+            items={[
+              {
+                title: "Automate repetitive UI work",
+                description:
+                  "Click through menus, fill forms, export reports, upload files, and repeat the same steps reliably—without you babysitting every click.",
+                icon: "fa-wand-magic-sparkles"
+              },
+              {
+                title: "Cross‑app workflows",
+                description:
+                  "Move data between apps: take info from a browser/PDF, paste into a spreadsheet/CRM, then email a summary—end to end.",
+                icon: "fa-diagram-project"
+              },
+              {
+                title: "File & desktop management",
+                description:
+                  "Organize downloads, rename and sort folders, batch move files, and keep your workspace clean using consistent conventions.",
+                icon: "fa-folder-tree"
+              },
+              {
+                title: "Terminal automation for developers",
+                description:
+                  "Run commands, inspect outputs, search logs, and help with coding tasks—then apply fixes in your tools like a capable assistant.",
+                icon: "fa-terminal"
+              },
+              {
+                title: "Research & summarization",
+                description:
+                  "Open documents, extract key points, compare sources, and draft a structured summary or briefing you can share.",
+                icon: "fa-magnifying-glass"
+              },
+              {
+                title: "Email + calendar execution",
+                description:
+                  "Draft emails from bullets, schedule meetings, and follow up—so the busywork is handled and you stay in control.",
+                icon: "fa-envelope"
+              },
+              {
+                title: "Creative production support",
+                description:
+                  "Batch process assets, organize project folders, and prepare deliverables—fast iterations without manual repetitive steps.",
+                icon: "fa-pen-nib"
+              },
+              {
+                title: "System navigation & settings",
+                description:
+                  "Find settings, change preferences, and navigate system dialogs—useful when you know the goal but not the menu path.",
+                icon: "fa-gear"
+              }
+            ]}
+          />
         </div>
       </section>
 

@@ -131,6 +131,21 @@ body {
   overflow-x: hidden;
 }
 
+/* Utility: invert images in dark mode even when theme is driven by prefers-color-scheme */
+.dark-invert {
+  filter: invert(0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark-invert {
+    filter: invert(1);
+  }
+}
+
+.dark .dark-invert {
+  filter: invert(1);
+}
+
 /* Premium Background */
 .bg-aurora {
   background:
