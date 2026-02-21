@@ -28,6 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+      <script
+        defer
+        data-website-id="dfid_LiSnGhW8MKZTGO5MjdjnX"
+        data-domain="controlbeta.vercel.app"
+        src="https://datafa.st/js/script.js">
+      </script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
       <body
