@@ -129,16 +129,16 @@ const ACT_WORKFLOW: WorkflowStep[] = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function AIAssistant(): React.ReactElement {
+export default function AIAssistant({ borderStreak }: { borderStreak?: boolean }): React.ReactElement {
   const [currentMode, setCurrentMode] = useState<Mode>('ask');
-  const [messages, setMessages]       = useState<Message[]>([]);
-  const [inputValue, setInputValue]   = useState<string>('');
-  const [hasStarted, setHasStarted]   = useState<boolean>(false);
-  const [isHovering, setIsHovering]   = useState<boolean>(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [hasStarted, setHasStarted] = useState<boolean>(false);
+  const [isHovering, setIsHovering] = useState<boolean>(false);
 
-  const modeRef     = useRef<Mode>('ask');
-  const stepRef     = useRef<number>(0);
-  const timerIds    = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const modeRef = useRef<Mode>('ask');
+  const stepRef = useRef<number>(0);
+  const timerIds = useRef<ReturnType<typeof setTimeout>[]>([]);
   const messagesRef = useRef<HTMLDivElement | null>(null);
   const initialized = useRef<boolean>(false);
 
@@ -296,10 +296,10 @@ export default function AIAssistant(): React.ReactElement {
   };
 
   const beginStep = (mode: Mode): void => {
-    const wf   = mode === 'ask' ? ASK_WORKFLOW : ACT_WORKFLOW;
-    const idx  = stepRef.current % wf.length;
+    const wf = mode === 'ask' ? ASK_WORKFLOW : ACT_WORKFLOW;
+    const idx = stepRef.current % wf.length;
     const step = wf[idx];
-    const spd  = Math.max(18, step.timings.typingInput / step.user.length);
+    const spd = Math.max(18, step.timings.typingInput / step.user.length);
 
     typeIntoInput(step.user, spd, () => {
       if (modeRef.current !== mode) return;
@@ -357,8 +357,7 @@ export default function AIAssistant(): React.ReactElement {
   return (
     <div style={{
       fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-      background: "linear-gradient(135deg, #f5f7fa 0%, #e8ebf0 100%)",
-      minHeight: "100vh", display: "flex",
+      display: "flex",
       justifyContent: "center", alignItems: "center", padding: "20px",
     }}>
       <style>{`
@@ -381,39 +380,72 @@ export default function AIAssistant(): React.ReactElement {
           -webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 16%,black 100%);
         }
         .tab-btn{
-          padding:7px 22px;border-radius:20px;border:none;
-          background:transparent;color:#888;font-size:14px;font-weight:600;
-          cursor:pointer;transition:all 0.22s;letter-spacing:0.03em;
+          padding:5px 16px;border-radius:20px;border:none;
+          background:transparent;color:#888;font-size:12px;font-weight:600;
+          cursor:pointer;transition:all 0.22s;letter-spacing:0.02em;
         }
         .tab-btn.active{background:#000;color:#fff}
         .icon-btn{
-          width:36px;height:36px;border:none;background:transparent;cursor:pointer;
+          width:30px;height:30px;border:none;background:transparent;cursor:pointer;
           display:flex;align-items:center;justify-content:center;
-          border-radius:10px;color:#999;font-size:15px;transition:background 0.18s;
+          border-radius:8px;color:#999;font-size:13px;transition:background 0.18s;
         }
         .icon-btn:hover{background:#f0f0f0;color:#555}
         .send-btn{
-          width:44px;height:44px;border-radius:50%;border:none;
+          width:36px;height:36px;border-radius:50%;border:none;
           background:#333;color:#fff;cursor:pointer;
           display:flex;align-items:center;justify-content:center;
-          font-size:15px;flex-shrink:0;transition:background 0.18s;
+          font-size:13px;flex-shrink:0;transition:background 0.18s;
         }
-        .send-btn:hover{background:#000}
+        .border-streak-svg {
+          position: absolute;
+          inset: -1px;
+          width: calc(100% + 2px);
+          height: calc(100% + 2px);
+          pointer-events: none;
+          z-index: 20;
+        }
+        
+        .streak-path {
+          fill: none;
+          stroke: #a855f7;
+          stroke-width: 3;
+          stroke-linecap: round;
+          stroke-dasharray: 100 400;
+          animation: streak-move 3s linear infinite;
+        }
+
+        @keyframes streak-move {
+          from { stroke-dashoffset: 500; }
+          to { stroke-dashoffset: 0; }
+        }
       `}</style>
 
       {/* ── Card ── */}
       <div style={{
-        width: "100%", maxWidth: "520px", background: "#fff", borderRadius: "28px",
-        boxShadow: "0 12px 48px rgba(0,0,0,0.10),0 2px 8px rgba(0,0,0,0.06)",
-        overflow: "hidden", display: "flex", flexDirection: "column",
+        width: "100%", maxWidth: "420px", background: "#fff", borderRadius: "24px",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.08),0 2px 6px rgba(0,0,0,0.04)",
+        display: "flex", flexDirection: "column",
+        position: 'relative',
       }}>
+        {borderStreak && (
+          <svg className="border-streak-svg">
+            <rect
+              x="0" y="0"
+              width="100%" height="100%"
+              rx="24"
+              className="streak-path"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+        )}
 
         {/* Header */}
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "14px 18px", borderBottom: "1px solid #f0f0f0",
+          padding: "10px 14px", borderBottom: "1px solid #f0f0f0",
         }}>
-          <div style={{ display: "flex", gap: "4px", background: "#f2f2f2", padding: "4px", borderRadius: "24px" }}>
+          <div style={{ display: "flex", gap: "3px", background: "#f2f2f2", padding: "3px", borderRadius: "20px" }}>
             {(['act', 'ask'] as Mode[]).map(mode => (
               <button
                 key={mode}
@@ -431,14 +463,17 @@ export default function AIAssistant(): React.ReactElement {
             <button className="icon-btn" title="History">
               <i className="fas fa-clock-rotate-left" />
             </button>
-            <button className="icon-btn" title="Settings">
+            <button className="icon-btn" title="Settings" onClick={() => {
+              const el = document.getElementById('settings');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}>
               <i className="fas fa-gear" />
             </button>
           </div>
         </div>
 
         {/* Body */}
-        <div style={{ position: "relative", height: "400px" }}>
+        <div style={{ position: "relative", height: "320px" }}>
 
           {/* Empty state */}
           <div style={{
@@ -447,11 +482,11 @@ export default function AIAssistant(): React.ReactElement {
             textAlign: "center", pointerEvents: "none",
             opacity: hasStarted ? 0 : 1, transition: "opacity 0.4s ease",
           }}>
-            <div style={{ fontSize: "44px", marginBottom: "20px", color: "#222" }}>⌘</div>
-            <h2 style={{ fontSize: "26px", fontWeight: 700, color: "#000", margin: "0 0 10px", lineHeight: 1.25 }}>
+            <div style={{ fontSize: "36px", marginBottom: "16px", color: "#222" }}>⌘</div>
+            <h2 style={{ fontSize: "20px", fontWeight: 700, color: "#000", margin: "0 0 8px", lineHeight: 1.25 }}>
               Greatness, how was your night?
             </h2>
-            <p style={{ fontSize: "15px", color: "#999", lineHeight: 1.6, margin: 0 }}>
+            <p style={{ fontSize: "13px", color: "#999", lineHeight: 1.6, margin: 0 }}>
               How can I assist you with your desktop tasks today?
             </p>
           </div>
@@ -482,10 +517,10 @@ export default function AIAssistant(): React.ReactElement {
                   {msg.isAction ? (
                     /* Action row */
                     <div style={{
-                      display: "flex", alignItems: "center", gap: "10px",
+                      display: "flex", alignItems: "center", gap: "8px",
                       background: "#f8f8f8", border: "1px solid #ebebeb",
-                      borderRadius: "14px", padding: "10px 14px",
-                      fontSize: "13px", color: "#444",
+                      borderRadius: "12px", padding: "8px 12px",
+                      fontSize: "12px", color: "#444",
                     }}>
                       {msg.isLoading ? (
                         <div style={{
@@ -508,12 +543,12 @@ export default function AIAssistant(): React.ReactElement {
                     /* Chat bubble */
                     <div style={{
                       background: msg.sender === 'user' ? '#000' : '#f5f5f5',
-                      color:      msg.sender === 'user' ? '#fff' : '#111',
+                      color: msg.sender === 'user' ? '#fff' : '#111',
                       borderRadius: msg.sender === 'user'
-                        ? "18px 18px 4px 18px"
-                        : "18px 18px 18px 4px",
-                      padding: msg.text === '__dots__' ? "14px 18px" : "12px 16px",
-                      fontSize: "14px", lineHeight: 1.55, whiteSpace: "pre-wrap",
+                        ? "16px 16px 4px 16px"
+                        : "16px 16px 16px 4px",
+                      padding: msg.text === '__dots__' ? "12px 16px" : "10px 14px",
+                      fontSize: "13px", lineHeight: 1.55, whiteSpace: "pre-wrap",
                     }}>
                       {msg.text === '__dots__' ? (
                         <span style={{ display: "flex", gap: "5px", alignItems: "center", height: "14px" }}>
@@ -545,21 +580,21 @@ export default function AIAssistant(): React.ReactElement {
         {/* Input bar */}
         <div style={{ padding: "12px 16px 4px" }}>
           <div style={{
-            display: "flex", alignItems: "center", gap: "10px",
-            background: "#f5f5f5", borderRadius: "28px", padding: "8px 8px 8px 16px",
+            display: "flex", alignItems: "center", gap: "8px",
+            background: "#f5f5f5", borderRadius: "24px", padding: "6px 6px 6px 14px",
           }}>
-            <i className="fas fa-paperclip" style={{ color: "#bbb", fontSize: "16px", cursor: "pointer", flexShrink: 0 }} />
+            <i className="fas fa-paperclip" style={{ color: "#bbb", fontSize: "14px", cursor: "pointer", flexShrink: 0 }} />
             <input
               type="text"
               value={inputValue}
               readOnly
-              placeholder={currentMode === 'ask' ? 'Ask a question or explain code...' : 'Describe a task to automate...'}
+              placeholder={currentMode === 'ask' ? 'Ask a question...' : 'Describe a task...'}
               style={{
                 flex: 1, border: "none", background: "transparent",
-                fontSize: "14px", color: "#333", outline: "none", minWidth: 0,
+                fontSize: "13px", color: "#333", outline: "none", minWidth: 0,
               }}
             />
-            <i className="fas fa-microphone" style={{ color: "#bbb", fontSize: "16px", cursor: "pointer", flexShrink: 0 }} />
+            <i className="fas fa-microphone" style={{ color: "#bbb", fontSize: "14px", cursor: "pointer", flexShrink: 0 }} />
             <button className="send-btn">
               <i className="fas fa-arrow-up" />
             </button>

@@ -4,30 +4,30 @@ const teamMembers = [
     {
         id: 1,
         name: "Okorie Greatness",
-        role: "Lead AI Engineer",
-        bio: "Ex-Google DeepMind. Specialist in large language models and reinforcement learning.",
-        image: "https://media.licdn.com/dms/image/v2/D4D03AQGXiplUB6RNYg/profile-displayphoto-scale_200_200/B4DZi0dw0IH8AY-/0/1755374360478?e=1770854400&v=beta&t=VJ9TSL0gKRbY2qj73ESwY_DXvYARGxwQUSHNtiwC5io"
+        role: "AI Engineer/Programmer",
+        bio: "",
+        image: "https://media.licdn.com/dms/image/v2/D4E03AQHQNOWWlaaTGg/profile-displayphoto-scale_400_400/B4EZyA5H7BGgAg-/0/1771688986881?e=1773273600&v=beta&t=LgTGS8Jaqk9xojDR5vp9yeI-zVr2RRjXB8yiXnIIKB0"
     },
     {
         id: 2,
         name: "Bello Nifemi",
-        role: "Product Designer",
-        bio: "Award-winning UX designer focused on human-AI interaction patterns.",
-        image: "https://media.licdn.com/dms/image/v2/D4D03AQF3hWi5bdh2JQ/profile-displayphoto-scale_400_400/B4DZrPRShIHsAg-/0/1764414011759?e=1770854400&v=beta&t=rQkY67HxxpfxG3MeC-cHBrHP2qSd2oDHX2yU2ZGxvxM"
+        role: "AI Engineer/Programmer",
+        bio: "",
+        image: "https://media.licdn.com/dms/image/v2/D4D03AQF3hWi5bdh2JQ/profile-displayphoto-scale_400_400/B4DZrPRShIHsAg-/0/1764414011759?e=1773273600&v=beta&t=aR8oXxcqWhBYQ9j3I89MK2AQ0U6iBwqyNH6t4cocG2E"
     },
     {
         id: 3,
         name: "Micheal Omale",
-        role: "Security Architect",
-        bio: "Ensures local processing and encryption standards meet enterprise needs.",
-        image: "https://media.licdn.com/dms/image/v2/D4D03AQE1oJMXKbtjjA/profile-displayphoto-scale_400_400/B4DZum_nIGIEAk-/0/1768033255557?e=1770854400&v=beta&t=aJ7Nth8UiLVp5kYIOncWG6q7OnCzaaAkgPsK1dKKjvk"
+        role: "Programmer",
+        bio: "",
+        image: "https://media.licdn.com/dms/image/v2/D4D03AQE1oJMXKbtjjA/profile-displayphoto-scale_400_400/B4DZum_nIGIEAk-/0/1768033255557?e=1773273600&v=beta&t=yt3ZRjgAaQKLiWOMjuMnekQe2ltRLJljHsjF3gpV7TM"
     },
     {
         id: 4,
         name: "Ameh Omale",
-        role: "Frontend Lead",
-        bio: "Electron and React expert building the invisible interface.",
-        image: "https://media.licdn.com/dms/image/v2/D5603AQFKOwAgR3iQ-A/profile-displayphoto-scale_100_100/B56Zuk7iVvHgAc-/0/1767998632335?e=1770854400&v=beta&t=F2VUWNzVZJT4CA0is4geR7nSGTe4PaM7F3H2fce597w"
+        role: "Programmer",
+        bio: "",
+        image: "https://media.licdn.com/dms/image/v2/D5603AQFKOwAgR3iQ-A/profile-displayphoto-scale_400_400/B56Zuk7iVvHgAg-/0/1767998632335?e=1773273600&v=beta&t=XH8t4sETgzjwTvlEOcfH-7B8Dji4wCcR5EX9qgDqFUE"
     }
 ];
 
@@ -121,8 +121,7 @@ export default function Team() {
                                         <p className="text-muted-foreground text-sm leading-relaxed font-medium">{member.bio}</p>
                                     </div>
 
-                                    {/* Arrow */}
-                                    <div className="absolute bottom-[-8px] left-1/2 -translate-x-1/2 w-4 h-4 bg-glass-card-bg rotate-45 border-r border-b border-border backdrop-blur-xl"></div>
+
                                 </div>
                             </div>
                         );

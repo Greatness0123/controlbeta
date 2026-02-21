@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useTheme } from './ThemeProvider';
+
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -31,15 +33,15 @@ interface ShortcutKeyProps {
 
 const Toggle: React.FC<ToggleProps> = ({ active, onToggle }) => (
   <div onClick={onToggle} style={{
-    width: '50px', height: '28px',
+    width: '40px', height: '22px',
     background: active ? '#000' : '#e0e0e0',
-    borderRadius: '14px', position: 'relative',
+    borderRadius: '11px', position: 'relative',
     cursor: 'pointer', transition: 'background 0.3s', flexShrink: 0,
   }}>
     <div style={{
-      position: 'absolute', width: '24px', height: '24px',
+      position: 'absolute', width: '18px', height: '18px',
       background: 'white', borderRadius: '50%',
-      top: '2px', left: active ? '24px' : '2px',
+      top: '2px', left: active ? '20px' : '2px',
       transition: 'left 0.3s',
     }} />
   </div>
@@ -47,19 +49,19 @@ const Toggle: React.FC<ToggleProps> = ({ active, onToggle }) => (
 
 const SettingItem: React.FC<SettingItemProps> = ({ icon, title, description, control, children }) => (
   <div style={{
-    display: 'flex', alignItems: 'center', gap: '16px',
-    padding: '16px 0', borderBottom: '1px solid #f0f0f0',
+    display: 'flex', alignItems: 'center', gap: '12px',
+    padding: '12px 0', borderBottom: '1px solid #f0f0f0',
   }}>
     <div style={{
-      width: '40px', height: '40px', display: 'flex',
+      width: '32px', height: '32px', display: 'flex',
       alignItems: 'center', justifyContent: 'center',
-      color: '#666', fontSize: '20px', flexShrink: 0,
+      color: '#666', fontSize: '16px', flexShrink: 0,
     }}>
       <i className={icon} />
     </div>
     <div style={{ flex: 1 }}>
-      <div style={{ fontSize: '16px', fontWeight: 600, color: '#000', marginBottom: '4px' }}>{title}</div>
-      <div style={{ fontSize: '14px', color: '#888' }}>{description}</div>
+      <div style={{ fontSize: '14px', fontWeight: 600, color: '#000', marginBottom: '2px' }}>{title}</div>
+      <div style={{ fontSize: '12px', color: '#888' }}>{description}</div>
       {children}
     </div>
     {control && <div style={{ flexShrink: 0 }}>{control}</div>}
@@ -68,15 +70,15 @@ const SettingItem: React.FC<SettingItemProps> = ({ icon, title, description, con
 
 const Section: React.FC<SectionProps> = ({ icon, label, children }) => (
   <div style={{
-    marginBottom: '24px', background: 'white',
-    border: '1px solid #e8e8e8', borderRadius: '16px', padding: '24px',
+    marginBottom: '16px', background: 'white',
+    border: '1px solid #e8e8e8', borderRadius: '12px', padding: '16px',
   }}>
     <div style={{
-      display: 'flex', alignItems: 'center', gap: '10px',
-      marginBottom: '24px', color: '#888', fontSize: '13px',
-      fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px',
+      display: 'flex', alignItems: 'center', gap: '8px',
+      marginBottom: '16px', color: '#888', fontSize: '11px',
+      fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px',
     }}>
-      <i className={icon} style={{ fontSize: '16px' }} />
+      <i className={icon} style={{ fontSize: '13px' }} />
       {label}
     </div>
     {children}
@@ -96,8 +98,8 @@ const ShortcutKey: React.FC<ShortcutKeyProps> = ({ label }) => (
 
 const Btn: React.FC<{ children: React.ReactNode; danger?: boolean; onClick?: () => void }> = ({ children, danger, onClick }) => (
   <button onClick={onClick} style={{
-    padding: '10px 24px', borderRadius: '10px',
-    fontSize: '14px', fontWeight: 500, cursor: 'pointer',
+    padding: '6px 16px', borderRadius: '8px',
+    fontSize: '12px', fontWeight: 500, cursor: 'pointer',
     border: `1px solid ${danger ? '#fcc' : '#e0e0e0'}`,
     background: danger ? '#fee' : 'white',
     color: danger ? '#c33' : '#000',
@@ -117,11 +119,11 @@ const SelectDropdown: React.FC<{
     value={value}
     onChange={e => onChange?.(e.target.value)}
     style={{
-      padding: '12px 44px 12px 16px', border: '1px solid #e0e0e0',
-      borderRadius: '10px', fontSize: '15px', color: '#000',
-      background: `white url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23666' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 16px center`,
-      cursor: 'pointer', appearance: 'none', minWidth: '200px',
-      marginTop: '12px', ...style,
+      padding: '8px 32px 8px 12px', border: '1px solid #e0e0e0',
+      borderRadius: '8px', fontSize: '13px', color: '#000',
+      background: `white url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23666' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center`,
+      cursor: 'pointer', appearance: 'none', minWidth: '140px',
+      marginTop: '8px', ...style,
     }}
   >
     {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -134,11 +136,11 @@ const InputField: React.FC<{ type?: string; value?: string; placeholder?: string
     defaultValue={value}
     placeholder={placeholder}
     style={{
-      width: '100%', padding: '12px 16px',
-      border: '1px solid #e0e0e0', borderRadius: '10px',
-      fontSize: '15px', color: '#000', background: 'white',
-      marginTop: '8px', outline: 'none',
-      letterSpacing: type === 'password' ? '3px' : undefined,
+      width: '100%', padding: '8px 12px',
+      border: '1px solid #e0e0e0', borderRadius: '8px',
+      fontSize: '13px', color: '#000', background: 'white',
+      marginTop: '6px', outline: 'none',
+      letterSpacing: type === 'password' ? '2px' : undefined,
     }}
   />
 );
@@ -166,9 +168,17 @@ const ActiveBadge: React.FC<{ label: string }> = ({ label }) => (
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function Settings(): React.ReactElement {
+export default function Settings({
+  borderStreak,
+  onSetBorderStreak
+}: {
+  borderStreak?: boolean;
+  onSetBorderStreak?: (val: boolean) => void;
+}): React.ReactElement {
+  const { theme, toggleTheme } = useTheme();
 
   // Toggles state
+
   const [toggles, setToggles] = useState<Record<string, boolean>>({
     borderStreak: false,
     securityPin: false,
@@ -185,18 +195,20 @@ export default function Settings(): React.ReactElement {
     floatingButton: true,
   });
 
-  const toggle = (key: string) =>
+  const toggle = (key: string) => {
+    if (key === 'borderStreak' && onSetBorderStreak) {
+      onSetBorderStreak(!borderStreak);
+    }
     setToggles(prev => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const [provider, setProvider] = useState<Provider>('gemini');
-  const [theme, setTheme] = useState('Light');
 
   return (
     <div style={{
       fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif",
-      background: 'linear-gradient(135deg, #f5f7fa 0%, #e8ebf0 100%)',
-      minHeight: '100vh', display: 'flex',
-      justifyContent: 'center', alignItems: 'center', padding: '20px',
+      display: 'flex',
+      justifyContent: 'center', alignItems: 'center',
     }}>
       <style>{`
         .scrollable-content::-webkit-scrollbar { width: 6px; }
@@ -205,74 +217,112 @@ export default function Settings(): React.ReactElement {
         select { -webkit-appearance: none; -moz-appearance: none; }
         input:focus { border-color: #999 !important; }
         .setting-item-last { border-bottom: none !important; }
+        
+        .border-streak-svg {
+          position: absolute;
+          inset: -1px;
+          width: calc(100% + 2px);
+          height: calc(100% + 2px);
+          pointer-events: none;
+          z-index: 20;
+        }
+        
+        .streak-path {
+          fill: none;
+          stroke: #a855f7;
+          stroke-width: 3;
+          stroke-linecap: round;
+          stroke-dasharray: 100 400;
+          animation: streak-move 3s linear infinite;
+        }
+
+        @keyframes streak-move {
+          from { stroke-dashoffset: 500; }
+          to { stroke-dashoffset: 0; }
+        }
       `}</style>
 
-      <div style={{
-        width: '100%', maxWidth: '640px', height: '750px',
-        background: 'white', borderRadius: '24px',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
-        overflow: 'hidden', display: 'flex', flexDirection: 'column',
+      <div id="settings" style={{
+        width: '100%', maxWidth: '480px', height: '500px',
+        background: 'var(--card)', borderRadius: '20px',
+        boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+        display: 'flex', flexDirection: 'column',
+        position: 'relative',
+        border: '1px solid var(--border)',
       }}>
+        {borderStreak && (
+          <svg className="border-streak-svg">
+            <rect
+              x="0" y="0"
+              width="100%" height="100%"
+              rx="20"
+              className="streak-path"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+        )}
+
 
         {/* ── Header ── */}
         <div style={{
-          padding: '32px 40px 24px', background: 'white',
+          padding: '24px 20px 16px', borderRadius: '20px 20px 0 0',
           borderBottom: '1px solid #e8e8e8', flexShrink: 0,
         }}>
-          <h1 style={{ fontSize: '32px', fontWeight: 600, color: '#000', marginBottom: '24px' }}>
+          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#000', marginBottom: '16px' }}>
             Settings
           </h1>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
             {/* Avatar */}
             <div style={{
-              width: '80px', height: '80px', borderRadius: '50%',
+              width: '48px', height: '48px', borderRadius: '50%',
               background: '#000', display: 'flex', alignItems: 'center',
               justifyContent: 'center', color: 'white',
-              fontSize: '32px', fontWeight: 600, flexShrink: 0,
+              fontSize: '20px', fontWeight: 600, flexShrink: 0,
             }}>
               C
             </div>
             {/* Info */}
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: '20px', fontWeight: 600, color: '#000', marginBottom: '4px' }}>Greatness</div>
-              <div style={{ fontSize: '15px', color: '#666', marginBottom: '8px' }}>grucookorie08@gmail.com</div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '14px', color: '#666' }}>
-                <div style={{ width: '8px', height: '8px', background: '#10b981', borderRadius: '50%' }} />
+            <div style={{ flex: '1 1 120px', minWidth: '120px' }}>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: '#000', marginBottom: '1px' }}>Greatness</div>
+              <div style={{ fontSize: '11px', color: '#666', marginBottom: '2px', wordBreak: 'break-all' }}>grucookorie08@gmail.com</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#666' }}>
+                <div style={{ width: '5px', height: '5px', background: '#10b981', borderRadius: '50%' }} />
                 Ready
               </div>
             </div>
             <button style={{
-              padding: '8px 20px', background: '#000', color: 'white',
-              border: 'none', borderRadius: '20px', fontSize: '13px',
-              fontWeight: 600, cursor: 'pointer', letterSpacing: '0.5px',
+              padding: '4px 10px', background: '#000', color: 'white',
+              border: 'none', borderRadius: '12px', fontSize: '10px',
+              fontWeight: 600, cursor: 'pointer', letterSpacing: '0.3px',
+              flexShrink: 0,
             }}>
-              MASTER PLAN
+              MASTER
             </button>
           </div>
         </div>
 
         {/* ── Scrollable Content ── */}
-        <div className="scrollable-content" style={{ flex: 1, overflowY: 'auto', padding: '24px 40px 40px' }}>
+        <div className="scrollable-content" style={{ flex: 1, overflowY: 'auto', padding: '16px 20px 32px' }}>
 
           {/* APPEARANCE */}
           <Section icon="fas fa-palette" label="Appearance">
             <SettingItem icon="fas fa-moon" title="Theme" description="Choose between light and dark mode">
               <SelectDropdown
-                value={theme}
-                onChange={setTheme}
+                value={theme === 'light' ? 'Light' : 'Dark'}
+                onChange={(v) => toggleTheme()}
                 options={[
                   { value: 'Light', label: 'Light' },
                   { value: 'Dark', label: 'Dark' },
-                  { value: 'Auto', label: 'Auto' },
                 ]}
               />
+
             </SettingItem>
             <div style={{ borderBottom: 'none' }}>
               <SettingItem
                 icon="fas fa-sparkles"
                 title="Border Streak Effect"
                 description="Show purple light streak along window borders"
-                control={<Toggle active={toggles.borderStreak} onToggle={() => toggle('borderStreak')} />}
+                control={<Toggle active={borderStreak ?? toggles.borderStreak} onToggle={() => toggle('borderStreak')} />}
               />
             </div>
           </Section>
