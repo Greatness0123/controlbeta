@@ -34,6 +34,7 @@ export default function RootLayout({
         data-domain="controlbeta.vercel.app"
         src="https://datafa.st/js/script.js">
       </script>
+      <meta name="google-site-verification" content="Z5jtrNKeBp7wHAjIz8Qe5zVY0N07BFwdh_feY7ouwhY" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       </head>
       <body
