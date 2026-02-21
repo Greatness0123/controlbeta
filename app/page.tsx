@@ -135,7 +135,7 @@ export default function Home() {
                     <i className="fas fa-arrow-right text-base group-hover:-rotate-45 transition-transform"></i>
                   </button>
                   <a
-                    href="/PROJECT_SUMMARY.pdf"
+                    href="/vision.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="h-12 px-8 rounded-full bg-secondary text-foreground border border-border font-semibold hover:bg-secondary/80 transition-colors flex items-center justify-center gap-2 text-base"
