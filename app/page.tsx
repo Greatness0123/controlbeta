@@ -46,7 +46,7 @@ export default function Home() {
     { icon: "fa-eye-slash", title: "Invisibility", desc: "Hidden from screen sharing and screenshots, ensuring your privacy while you work." }
   ];
 
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz0HY2Dg3F2eaziy-HtY7CXzYhzBc98vBXLI2HQQxzoJJzRhXu3s7TeX4ZuX_OpOIzN9A/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzaJA87ar2GT68vpkSUjKn54uhFo1AuCDeXmbTIQsDcgtI5q10gdulFD-YxMDOj8-zmUg/exec';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
