@@ -105,32 +105,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             z-index: 1;
           }
 
-          :root {
-            --background: #ffffff;
-            --foreground: #000000;
-            --card: #f9f9f9;
-            --border: #e2e2e2;
-            --muted: #737373;
-          }
-
-          :root.dark {
-            --background: #0a0a0a;
-            --foreground: #ffffff;
-            --card: #171717;
-            --border: #262626;
-            --muted: #a3a3a3;
-          }
-
           body {
-            background-color: var(--background);
-            color: var(--foreground);
             transition: background-color 0s;
-          }
-
-          .glass-card {
-            background: var(--card) !important;
-            border-color: var(--border) !important;
-            color: var(--foreground) !important;
           }
         `}</style>
       </div>

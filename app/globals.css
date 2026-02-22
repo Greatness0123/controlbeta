@@ -51,36 +51,6 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: #09090b;
-    --card-foreground: #fafafa;
-    --popover: #09090b;
-    --popover-foreground: #fafafa;
-    --primary: #fafafa;
-    --primary-foreground: #18181b;
-    --secondary: #27272a;
-    --secondary-foreground: #fafafa;
-    --muted: #27272a;
-    --muted-foreground: #a1a1aa;
-    --accent: #27272a;
-    --accent-foreground: #fafafa;
-    --destructive: #7f1d1d;
-    --destructive-foreground: #fafafa;
-    --border: #27272a;
-    --input: #27272a;
-    --ring: #d4d4d8;
-
-    /* Glass Dark */
-    --glass-bg: rgba(0, 0, 0, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-card-bg: rgba(9, 9, 11, 0.8);
-    --glass-card-border: rgba(255, 255, 255, 0.1);
-    --glass-card-shadow: rgba(0, 0, 0, 0.3);
-  }
-}
 
 @theme inline {
   --color-background: var(--background);
@@ -131,16 +101,11 @@ body {
   overflow-x: hidden;
 }
 
-/* Utility: invert images in dark mode even when theme is driven by prefers-color-scheme */
+/* Utility: invert images in dark mode */
 .dark-invert {
   filter: invert(0);
 }
 
-@media (prefers-color-scheme: dark) {
-  .dark-invert {
-    filter: invert(1);
-  }
-}
 
 .dark .dark-invert {
   filter: invert(1);
@@ -179,14 +144,6 @@ body {
   background-clip: text;
 }
 
-@media (prefers-color-scheme: dark) {
-  .text-gradient {
-    background: linear-gradient(to right, #a855f7, #e9d5ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-}
 
 .dark .text-gradient {
   background: linear-gradient(to right, #a855f7, #e9d5ff);
@@ -202,14 +159,6 @@ body {
   background-clip: text;
 }
 
-@media (prefers-color-scheme: dark) {
-  .text-gradient-subtle {
-    background: linear-gradient(to bottom, #fafafa, #a1a1aa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-}
 
 .dark .text-gradient-subtle {
   background: linear-gradient(to bottom, #fafafa, #a1a1aa);
@@ -262,12 +211,6 @@ body {
     linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
 }
 
-@media (prefers-color-scheme: dark) {
-  .bg-grid {
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  }
-}
 
 .dark .bg-grid {
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
@@ -322,6 +265,7 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
