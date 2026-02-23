@@ -29,7 +29,15 @@ export default function InfiniteRotatingCards({
   // Drag state
   const dragActiveRef = useRef(false);
   const dragStartXRef = useRef(0);
+  const dragStartYRef = useRef(0);
   const dragStartPosRef = useRef(0);
+  const dragLockedRef = useRef<'none' | 'horizontal' | 'vertical'>('none');
+
+  // Momentum / inertia
+  const velocityRef = useRef(0);
+  const lastMoveTimeRef = useRef(0);
+  const lastMoveXRef = useRef(0);
+  const momentumRafRef = useRef(0);
 
   // Duplicate items to make wrap-around seamless.
   const loopItems = useMemo(() => [...items, ...items], [items]);
@@ -47,13 +55,23 @@ export default function InfiniteRotatingCards({
       last = now;
 
       if (!isInteractingRef.current) {
-        const dx = (speedPxPerSecond * dt) / 1000;
-        const half = halfWidthRef.current;
+        // Apply momentum if velocity exists
+        if (Math.abs(velocityRef.current) > 0.5) {
+          const half = halfWidthRef.current;
+          if (half > 0) {
+            posRef.current = ((posRef.current - velocityRef.current * (dt / 16)) % half + half) % half;
+            track.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+            velocityRef.current *= 0.95; // friction
+          }
+        } else {
+          velocityRef.current = 0;
+          const dx = (speedPxPerSecond * dt) / 1000;
+          const half = halfWidthRef.current;
 
-        // Smooth marquee-like motion by translating the track.
-        if (half > 0) {
-          posRef.current = (posRef.current + dx) % half;
-          track.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+          if (half > 0) {
+            posRef.current = (posRef.current + dx) % half;
+            track.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
+          }
         }
       }
 
@@ -103,10 +121,17 @@ export default function InfiniteRotatingCards({
       const half = halfWidthRef.current;
       if (half <= 0) return;
       beginInteract();
+      velocityRef.current = 0;
       dragActiveRef.current = true;
       dragStartXRef.current = e.clientX;
+      dragStartYRef.current = e.clientY;
       dragStartPosRef.current = posRef.current;
-      (e.target as Element)?.setPointerCapture?.(e.pointerId);
+      dragLockedRef.current = 'none';
+      lastMoveTimeRef.current = performance.now();
+      lastMoveXRef.current = e.clientX;
+      if (e.pointerType === "mouse") {
+        (e.target as Element)?.setPointerCapture?.(e.pointerId);
+      }
     };
 
     const onPointerMove = (e: PointerEvent) => {
@@ -114,7 +139,34 @@ export default function InfiniteRotatingCards({
       const half = halfWidthRef.current;
       if (half <= 0) return;
       const dx = e.clientX - dragStartXRef.current;
-      // Dragging right should move track right (i.e. decrease pos), so invert dx.
+      const dy = e.clientY - dragStartYRef.current;
+
+      // Lock direction on first significant movement (for touch)
+      if (dragLockedRef.current === 'none' && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+        dragLockedRef.current = Math.abs(dx) >= Math.abs(dy) ? 'horizontal' : 'vertical';
+      }
+
+      // If locked to vertical, release so the page can scroll
+      if (dragLockedRef.current === 'vertical') {
+        dragActiveRef.current = false;
+        endInteract();
+        return;
+      }
+
+      // Prevent vertical scrolling while dragging horizontally
+      if (dragLockedRef.current === 'horizontal') {
+        e.preventDefault();
+      }
+
+      // Track velocity for momentum
+      const now = performance.now();
+      const timeDelta = now - lastMoveTimeRef.current;
+      if (timeDelta > 0) {
+        velocityRef.current = (e.clientX - lastMoveXRef.current) / Math.max(timeDelta / 16, 1);
+      }
+      lastMoveTimeRef.current = now;
+      lastMoveXRef.current = e.clientX;
+
       posRef.current = ((dragStartPosRef.current - dx) % half + half) % half;
       track.style.transform = `translate3d(${-posRef.current}px, 0, 0)`;
     };
@@ -122,6 +174,7 @@ export default function InfiniteRotatingCards({
     const onPointerUp = () => {
       if (!dragActiveRef.current) return;
       dragActiveRef.current = false;
+      dragLockedRef.current = 'none';
       endInteract();
     };
 
@@ -159,8 +212,8 @@ export default function InfiniteRotatingCards({
     <div className={className}>
       <div
         ref={viewportRef}
-        className="no-scrollbar overflow-hidden"
-        style={{ touchAction: "pan-x", cursor: "grab" }}
+        className="no-scrollbar overflow-hidden select-none"
+        style={{ touchAction: "pan-y", cursor: "grab" }}
         onMouseEnter={beginInteract}
         onMouseLeave={endInteract}
       >

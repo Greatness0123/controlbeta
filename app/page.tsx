@@ -6,7 +6,6 @@ import Team from "@/components/Team";
 import { FAQSection } from "@/components/faq";
 import { FadeIn } from "@/components/fade-in";
 import { useState, useEffect } from "react";
-import GradientText from '@/components/gradienttext';
 import InfiniteRotatingCards from "@/components/InfiniteRotatingCards";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Settings from "@/components/settings";
@@ -118,8 +117,17 @@ export default function Home() {
                   Now accepting beta users
                 </div>
 
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] text-foreground">
-                  Control everything.
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1] text-foreground flex flex-col items-center md:items-start gap-0">
+                  <span>Control</span>
+                  <div className="h-[1.1em] flex items-center">
+                    <RotatingText
+                      texts={['Everything', 'Applications', 'Softwares', 'Workflows', 'Like a Pro']}
+                      mainClassName="overflow-hidden"
+                      staggerDuration={0.025}
+                      splitBy="characters"
+                      rotationInterval={3000}
+                    />
+                  </div>
                 </h1>
 
                 <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mx-auto md:mx-0">
@@ -183,13 +191,11 @@ export default function Home() {
                           className="w-full text-left p-4 md:p-5 flex items-center justify-between gap-3 group"
                         >
                           <div className="flex gap-4 items-center">
-                            <div className={`w-8 h-8 md:w-10 md:h-10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform ${feature.isLucide ? 'bg-accent-purple/10' : 'bg-secondary'}`}>
-                              {feature.isLucide ? (
-                                feature.icon === 'Brain' ? <Brain className="w-4 h-4 md:w-5 md:h-5 text-accent-purple" /> : <MousePointer2 className="w-4 h-4 md:w-5 md:h-5 text-accent-purple" />
-                              ) : (
-                                <i className={`fas ${feature.icon} text-foreground text-sm md:text-base`}></i>
-                              )}
-                            </div>
+                            {feature.isLucide ? (
+                              feature.icon === 'Brain' ? <Brain className="w-5 h-5 md:w-6 md:h-6 text-accent-purple flex-shrink-0 group-hover:scale-110 transition-transform" /> : <MousePointer2 className="w-5 h-5 md:w-6 md:h-6 text-accent-purple flex-shrink-0 group-hover:scale-110 transition-transform" />
+                            ) : (
+                              <i className={`fas ${feature.icon} text-foreground text-base md:text-lg flex-shrink-0 group-hover:scale-110 transition-transform`}></i>
+                            )}
                             <h4 className="font-bold text-base md:text-lg text-foreground tracking-tight">{feature.title}</h4>
                           </div>
                           <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${expandedFeature === i ? 'rotate-180' : ''}`} />

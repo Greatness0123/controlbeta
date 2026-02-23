@@ -32,7 +32,7 @@ interface ShortcutKeyProps {
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 const Toggle: React.FC<ToggleProps> = ({ active, onToggle }) => (
-  <div onClick={onToggle} style={{
+  <div onClick={onToggle} className={active ? "bg-black" : ""} style={{
     width: '40px', height: '22px',
     background: active ? '#000' : '#e0e0e0',
     borderRadius: '11px', position: 'relative',
@@ -60,7 +60,7 @@ const SettingItem: React.FC<SettingItemProps> = ({ icon, title, description, con
       <i className={icon} />
     </div>
     <div style={{ flex: 1 }}>
-      <div style={{ fontSize: '14px', fontWeight: 600, color: '#000', marginBottom: '2px' }}>{title}</div>
+      <div style={{ fontSize: '14px', fontWeight: 600, color: 'inherit', marginBottom: '2px' }}>{title}</div>
       <div style={{ fontSize: '12px', color: '#888' }}>{description}</div>
       {children}
     </div>
@@ -69,7 +69,7 @@ const SettingItem: React.FC<SettingItemProps> = ({ icon, title, description, con
 );
 
 const Section: React.FC<SectionProps> = ({ icon, label, children }) => (
-  <div style={{
+  <div className="bg-white" style={{
     marginBottom: '16px', background: 'white',
     border: '1px solid #e8e8e8', borderRadius: '12px', padding: '16px',
   }}>
@@ -97,12 +97,12 @@ const ShortcutKey: React.FC<ShortcutKeyProps> = ({ label }) => (
 );
 
 const Btn: React.FC<{ children: React.ReactNode; danger?: boolean; onClick?: () => void }> = ({ children, danger, onClick }) => (
-  <button onClick={onClick} style={{
+  <button onClick={onClick} className={danger ? "" : "bg-white"} style={{
     padding: '6px 16px', borderRadius: '8px',
     fontSize: '12px', fontWeight: 500, cursor: 'pointer',
     border: `1px solid ${danger ? '#fcc' : '#e0e0e0'}`,
     background: danger ? '#fee' : 'white',
-    color: danger ? '#c33' : '#000',
+    color: danger ? '#c33' : 'inherit',
     transition: 'all 0.2s',
   }}>
     {children}
@@ -118,9 +118,10 @@ const SelectDropdown: React.FC<{
   <select
     value={value}
     onChange={e => onChange?.(e.target.value)}
+    className="bg-white"
     style={{
       padding: '8px 32px 8px 12px', border: '1px solid #e0e0e0',
-      borderRadius: '8px', fontSize: '13px', color: '#000',
+      borderRadius: '8px', fontSize: '13px', color: 'inherit',
       background: `white url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23666' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center`,
       cursor: 'pointer', appearance: 'none', minWidth: '140px',
       marginTop: '8px', ...style,
@@ -135,10 +136,11 @@ const InputField: React.FC<{ type?: string; value?: string; placeholder?: string
     type={type}
     defaultValue={value}
     placeholder={placeholder}
+    className="bg-white"
     style={{
       width: '100%', padding: '8px 12px',
       border: '1px solid #e0e0e0', borderRadius: '8px',
-      fontSize: '13px', color: '#000', background: 'white',
+      fontSize: '13px', color: 'inherit', background: 'white',
       marginTop: '6px', outline: 'none',
       letterSpacing: type === 'password' ? '2px' : undefined,
     }}
@@ -268,12 +270,12 @@ export default function Settings({
           padding: '24px 20px 16px', borderRadius: '20px 20px 0 0',
           borderBottom: '1px solid #e8e8e8', flexShrink: 0,
         }}>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#000', marginBottom: '16px' }}>
+          <h1 style={{ fontSize: '20px', fontWeight: 600, color: 'inherit', marginBottom: '16px' }}>
             Settings
           </h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
             {/* Avatar */}
-            <div style={{
+            <div className="bg-black" style={{
               width: '48px', height: '48px', borderRadius: '50%',
               background: '#000', display: 'flex', alignItems: 'center',
               justifyContent: 'center', color: 'white',
@@ -283,14 +285,14 @@ export default function Settings({
             </div>
             {/* Info */}
             <div style={{ flex: '1 1 120px', minWidth: '120px' }}>
-              <div style={{ fontSize: '14px', fontWeight: 600, color: '#000', marginBottom: '1px' }}>Greatness</div>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: 'inherit', marginBottom: '1px' }}>Greatness</div>
               <div style={{ fontSize: '11px', color: '#666', marginBottom: '2px', wordBreak: 'break-all' }}>grucookorie08@gmail.com</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: '#666' }}>
                 <div style={{ width: '5px', height: '5px', background: '#10b981', borderRadius: '50%' }} />
                 Ready
               </div>
             </div>
-            <button style={{
+            <button className="bg-black" style={{
               padding: '4px 10px', background: '#000', color: 'white',
               border: 'none', borderRadius: '12px', fontSize: '10px',
               fontWeight: 600, cursor: 'pointer', letterSpacing: '0.3px',

@@ -261,6 +261,24 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Enforce text contrast for light containers in dark mode */
+.dark .bg-white,
+.dark .bg-white *,
+.dark .glass,
+.dark .glass *,
+.dark .glass-card,
+.dark .glass-card * {
+  --foreground: oklch(0.145 0 0);
+  color: var(--foreground);
+}
+
+/* Enforce text contrast for black containers in dark mode */
+.dark .bg-black,
+.dark .bg-black * {
+  --foreground: oklch(0.985 0 0);
+  color: var(--foreground);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
