@@ -328,9 +328,9 @@ export default function Home() {
         <section id="faq" className="py-16 border-t border-border">
           <FAQSection />
         </section>
-        <section id="team" className="py-16 bg-secondary/10 border-y border-border">
+        {/* <section id="team" className="py-16 bg-secondary/10 border-y border-border">
           <Team />
-        </section>
+        </section> */}
 
         <footer className="py-20 border-t border-border text-center text-muted-foreground">
           <p className="text-lg">&copy; 2026 Control AI. The future is local.</p>
