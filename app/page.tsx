@@ -131,7 +131,7 @@ export default function Home() {
                 </h1>
 
                 <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mx-auto md:mx-0">
-                  The AI desktop agent that gets things done — private, local-first, and ready out of the box.
+                  The AI desktop agent that gets things done — private, accessible, and ready out of the box.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
