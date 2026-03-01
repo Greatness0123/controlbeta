@@ -333,7 +333,7 @@ export default function Home() {
         </section> */}
 
         <footer className="py-20 border-t border-border text-center text-muted-foreground">
-          <p className="text-lg">&copy; 2026 Control AI. The future is local.</p>
+          <p className="text-lg">&copy; 2026 Control AI. The future of human-computer interaction</p>
         </footer>
       </div>
     </ThemeProvider>
